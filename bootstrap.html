@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Coding Bootstrap</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        .jumbotron {
+            background-image: url('images/player2.png');
+            background-size: cover;            
+            text-shadow: black 0.2em 0.2em 0.2em;
+            color: blueviolet;  
+        }
+        @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+        * {
+            font-family:'Nanum Gothic';
+        }
+
+        a:hover{
+            color: #bbbbbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .navbar-default {
+            background-color: #000000;
+            border-color: #000000;
+        }
+        .navbar-default .navbar-brand {
+            color: #ffffff;
+        }
+        .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus,
+        {
+            background-color: transparent;
+            color: #bbbbbb;
+        }
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+            color: white;
+            background-color: #000000;
+        }
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+            color:#bbbbbb; 
+        }
+        .navbar-default .navbar-nav > .open > a,
+        .navbar-default .navbar-nav > .open > a:hover,
+        .navbar-default .navbar-nav > .open > a:focus {
+            color:#000000;
+            background-color: #ffffff;
+            text-decoration: none;
+        }
+        .navbar-default .navbar-nav > li > * {
+            color:white;
+        }
+        @media(max-width:767px){
+            .navbar-default .navbar-nav .open .dropdown-menu > li > * {
+                color: #ffffff;
+            }
+            .navbar-default .navbar-nav .open .dropdown-menu > li > *:hover,
+            .navbar-default .navbar-nav .open .dropdown-menu > li > *:focus {
+                color: #bbbbbb;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">코딩 부스터</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">소개<span class="sr-only"></span></span></a></li>
+                    <li><a href="#">강사진</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">강의<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">C언어</a></li>
+                            <li><a href="#">Java</a></li>
+                            <li><a href="#">안드로이드</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left" action="">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="내용을 입력하세요.">
+                    </div>
+                    <button class="btn btn-default" type="submit">검색</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">접속하기<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">로그인</a></li>
+                            <li><a href="#">회원가입</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">코딩 부스터를 소개합니다.</h1>
+            <p class="text-center">코딩 부스터는 IT 교육 사이트입니다. 다양한 IT 관련 무료 및 유료 강의가 존재합니다.</p>
+            <p class="text-center"><a class="btn btn-primary btn-lg" href="#" role="button">강의 들으러 가기</a></p>
+        </div>
+    </div>    
+    <footer style="background-color:#000000; color:#ffffff">
+        <div class="container">
+            <br>
+            <div class="row">
+                <div class="col-sm-2" style="text-align:center;">
+                    <h5>Copyright &copy;2017</h5>
+                    <h5>임태환(thlim)</h5>
+                </div>
+                <div class="col-sm-4" style="text-align:center;">
+                    <h5>대표자 소개</h5>
+                    <h5>임태환(thlim)</h5>
+                </div>
+                <div class="col-sm-2" style="text-align:center;">
+                    <h5>대표자 소개</h5>
+                    <h5>임태환(thlim)</h5>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

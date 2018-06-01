@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            $("#section016 :header").hover(function(){
+                $(this).css("background-color","yellow");
+            },function(){
+                $(this).css("background-color","white");
+            });
+
+            $("#pref").change(function() {
+                $("#section017 output:first").text($("#pref option:selected").text());
+            });
+
+            $("#section018 :button").click(function(){
+                $("#section018 :input:first").css("background","orange");
+            });
+
+            $("#section019 :button").click(function(){
+                $("#section019 :input[type=text]:last").css("background","orange");
+            });
+
+            $("#section020 h1+ol").css("border","1px solid red");
+
+            $("#section021 #sale tbody tr:lt(6)").css("background-color","orange");
+
+            $("#section318 div:eq(0)").click(function() {
+                $(this).switchClass("ef2_318","ef1_318");
+            });
+
+            $("#section318 div:eq(1)").click(function() {
+                $(this).switchClass("ef2_318","ef1_318",{
+                    duration:7000,
+                    easing:"linear",
+                    complete:function() {
+                        $(this).text("효과 처리 완료");
+                    }
+                });
+            });
+
+            $("#section319 div:eq(0)").click(function() {
+                $(this).toggleClass("ef3");
+            });
+
+            $("#section319 div:eq(1)").click(function() {
+                $(this).toggleClass("ef3",3 * 1000,"easeOutExpo");
+            });    
+
+            $("#section319 div:eq(2)").click(function() {
+                $(this).toggleClass("ef3",false,{
+                    duration:4 *1000,
+                    easing:"linear",
+                    complete:function() {
+                        $(this).text("효과 처리 완료");
+                    }
+                });
+            });           
+
+            $("#section320 div").click(function() {                
+                $(this).toggle("slide");
+                
+                (function(obj){                    
+                    setTimeout(function() {
+                        $(obj).toggle("slide");
+                    },3000);
+                })(this);                
+            });
+        })
+    </script>
+    <style>
+        body > div {border: 1px solid black;margin: 10px;}
+    </style>
+</head>
+<body>
+    <div id="section016">
+        <h1>제목 요소를 지정한다</h1>
+        <h2>매출 목록</h2>
+        <h3>공덕점</h3>
+        <h3>잠실점</h3>
+        <h3>목동점</h3>
+    </div>
+    
+    <div id="section017">
+        <h1>선택된 요소를 지정한다</h1>
+        <form>
+            <select id="pref">
+                <option>경기도</option>
+                <option>경상도</option>
+                <option>서울시</option>
+                <option>전라도</option>
+                <option>충청도</option>
+                <option>강원도</option>
+                <option>제주도</option>
+            </select>
+        </form>
+        <output></output>
+    </div>
+
+    <div id="section018">
+        <h1>첫번째 input 요소를 선택한다</h1>
+        <form>
+            <input type="text" value="iPhone"><br>
+            <input type="text" value="iPad"><br>
+            <input type="button" value="첫 번째 input 요소 배경색 변경">
+        </form>
+    </div>
+
+    <div id="section019">
+        <h1>마지막 텍스트 필드를 선택한다</h1>
+        <form>
+            <input type="text" value="iPhone"><br>
+            <input type="text" value="iPad"><br>
+            <input type="button" value="마지막 텍스트 필드 배경색 변경">
+        </form>
+    </div>
+
+    <div id="section020">
+        <h1>특정 요소 다음에 있는 요소를 지정한다</h1>
+        <ol>
+            <li><span>Item 1</span></li>
+            <li>Item 2</li>
+            <li>Item 3
+                <ol>
+                    <li><span>Item 3-1</span></li>
+                    <li>Item 3-2</li>
+                </ol>
+            </li>
+            <li>Item 4</li>
+        </ol>
+        <ol>
+            <li>Item B1</li>
+            <li><span>Item B2</span></li>
+        </ol>
+    </div>
+
+    <div id="section021">
+        <table border="1" id="sale">
+            <thead>
+                <tr><th>날짜</th><th>매출</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1월</td><td>100원</td></tr>
+                <tr><td>2월</td><td>100원</td></tr>
+                <tr><td>3월</td><td>100원</td></tr>
+                <tr><td>4월</td><td>100원</td></tr>
+                <tr><td>5월</td><td>100원</td></tr>
+                <tr><td>6월</td><td>100원</td></tr>      
+                <tr><td>7월</td><td>100원</td></tr>
+                <tr><td>8월</td><td>100원</td></tr>
+                <tr><td>9월</td><td>100원</td></tr>
+                <tr><td>10월</td><td>100원</td></tr>
+                <tr><td>11월</td><td>100원</td></tr>
+                <tr><td>12월</td><td>100원</td></tr>
+            </tbody>
+        </table> 
+    </div>  
+
+    <div id="section318">
+        <style>
+            .ef1_318 {
+                width:150px;height: 50px;
+                color: red;background-color: #ff8;
+                border: 1px solid black;
+            }
+            .ef2_318 {
+                width:200px;height: 100px;
+                color: yellow;background-color: #00008f;
+                border: 3px solid red;
+            }
+        </style>
+        <h1>jQuery UI 효과</h1>
+        <div class="ef1_318 ef2_318">
+            Box 1
+        </div>
+        <div class="ef1_318 ef2_318">
+            Box 2 
+        </div>
+    </div>    
+    
+    <div id="section319">
+        <style>
+            .ef1 {
+                width:200px;height: 40px;
+                color: red;background-color: #ff8;
+                border: 1px solid black;
+            }
+            .ef2 {
+                width:200px;height: 40px;
+                color: yellow;background-color: #00008f;
+                border: 3px solid red;
+            }  
+            .ef3 {
+                width:200px;height: 70px;
+                color: white;background-color: black;
+                border: 5px dotted orange;
+            }           
+        </style>
+        <h1>jQuery UI 효과</h1>
+        <div class="ef1">
+            Box 1 (ef1 to ef3)
+        </div>
+        <div class="ef2">
+            Box 2 (ef2 to ef3)
+        </div>
+        <div class="ef1 ef3">
+            Box 3
+        </div>
+    </div>
+    
+    <div id="section320">
+        <style>
+            .ef {
+                width:150px;height: 50px;
+                color: white;background-color: #a55;
+                border: 1px solid black;
+            }
+        </style>
+        <h1>jQuery UI 효과</h1>
+        <div class="ef">
+            Box 1
+        </div>
+        <div class="ef">
+            Box 2
+        </div>
+    </div>   
+
+    <table border="1" id="sale">
+        <thead>
+            <tr><th>날짜</th><th>매출</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>1월</td><td>100원</td></tr>
+            <tr><td>2월</td><td>100원</td></tr>
+            <tr><td>3월</td><td>100원</td></tr>
+            <tr><td>4월</td><td>100원</td></tr>
+            <tr><td>5월</td><td>100원</td></tr>
+            <tr><td>6월</td><td>100원</td></tr>      
+            <tr><td>7월</td><td>100원</td></tr>
+            <tr><td>8월</td><td>100원</td></tr>
+            <tr><td>9월</td><td>100원</td></tr>
+            <tr><td>10월</td><td>100원</td></tr>
+            <tr><td>11월</td><td>100원</td></tr>
+            <tr><td>12월</td><td>100원</td></tr>
+        </tbody>
+    </table> 
+</body>
+</html>

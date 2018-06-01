@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google Chart</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     
+    <style>
+    </style>
+</head>
+<body>
+    <!--Table and divs that hold the pie charts-->
+    <table class="table">
+        <tr>
+            <td>
+                <!--Div that will hold the dashboard-->
+                <div id="dashboard_div">
+                    <!--Divs that will hold each control and chart-->
+                    <div id="filter_div"></div>
+                    <div id="Sarah_chart_div" style="border: 1px solid #ccc"></div>
+                    <div id="toolbar_div" style="border: 1px solid #ccc"></div>
+                </div>   
+            </td>
+            <td>
+                <div id="Anthony_chart_div" style="border: 1px solid #ccc"></div>
+            </td>
+        </tr>
+    </table>
+    
+    <!--Table and divs that hold the pie charts-->
+    <table class="table">
+        <tr>
+            <td><div id="piechart_div" style="border: 1px solid #ccc"></div></td>
+            <td><div id="barchart_div" style="border: 1px solid #ccc"></div></td>
+        </tr>
+    </table>
+
+    <button>chart.draw()</button>
+    <button>ChartWrapper</button>
+    <button>DrawChart()</button>
+
+    <button>PieChart</button>
+    <button>BarChart</button>
+    <button>DataTable</button>
+
+    <button>edit</button>
+
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+
+    <!--Load the bootstrap API-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--Load the jqury API-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script type="text/javascript">
+        var data;
+        var dataTable;
+        var options;
+        var chart;
+        var chartEditor = null;
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+        // Load the Visualization API and the table package.
+        google.charts.load('current', {'packages':['table']});
+        // Load the Visualization API and the controls package.
+        google.charts.load('current', {'packages':['corechart', 'controls']});
+        // Load the Visualization API and the charteditor package
+        google.charts.load('current', {packages: ['charteditor']});
+
+        //google.charts.setOnLoadCallback(tt);
+        function tt() {
+            var dt1 = new google.visualization.DataTable({
+            cols: [{id: 'task', label: 'Task', type: 'string'},
+                {id: 'hours', label: 'Hours per Day', type: 'number'}],
+            rows: [{c:[{v: 'Work'}, {v: 11}]},
+                {c:[{v: 'Eat'}, {v: 2}]},
+                {c:[{v: 'Commute'}, {v: 2}]},
+                {c:[{v: 'Watch TV'}, {v:2}]},
+                {c:[{v: 'Sleep'}, {v:7, f:'7.000'}]}]
+            }, 0.6);
+
+            document.writeln(dt1.toJSON() + "<br>" + dt1.getValue(0,1) + dt1.getFormattedValue(0,1));
+
+            var dt2 = new google.visualization.DataTable();
+            dt2.addColumn('string', 'Task');
+            dt2.addColumn('number', 'Hours per Day');
+            dt2.addRows([
+            ['Work', 11],
+            ['Eat', 2],
+            ['Commute', 2],
+            ['Watch TV', 2],
+            ['Sleep', {v:7, f:'7.000'}]
+            ]);
+
+            document.writeln(dt2.toJSON() + "<br>" + dt2.getValue(1,1));
+
+            alert('o.k');
+        }
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        // Draw the pie chart for Sarah's pizza when Charts is loaded.
+        google.charts.setOnLoadCallback(drawSarahChart);
+
+        // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+        google.charts.setOnLoadCallback(drawAnthonyChart);
+
+        // Draw the pie chart and bar chart when Charts is loaded.
+        google.charts.setOnLoadCallback(drawMultiChart);
+        
+        // Callback that draws the pie chart for Sarah's pizza.
+        function drawSarahChart() {
+            // Create our data table.
+            var data = google.visualization.arrayToDataTable([
+            ['Name', 'Donuts eaten'],
+            ['Michael' , 5],
+            ['Elisa', 7],
+            ['Robert', 3],
+            ['John', 2],
+            ['Jessica', 6],
+            ['Aaron', 1],
+            ['Margareth', 8]
+            ]);
+
+            // Create a dashboard.
+            var dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard_div'));
+
+            // Create a range slider, passing some options
+            var donutRangeSlider = new google.visualization.ControlWrapper({
+            'controlType': 'NumberRangeFilter',
+            'containerId': 'filter_div',
+            'options': {
+                'filterColumnLabel': 'Donuts eaten'
+            }
+            });
+
+            // Create a pie chart, passing some options
+            var pieChart = new google.visualization.ChartWrapper({
+                'chartType': 'PieChart',
+                'dataTable' : data,
+                'containerId': 'Sarah_chart_div',
+                'options': {
+                    'width': 300,
+                    'height': 300,
+                    'pieSliceText': 'value',
+                    'legend': 'right'
+                }
+            });
+
+            // Establish dependencies, declaring that 'filter' drives 'pieChart',
+            // so that the pie chart will only display entries that are let through
+            // given the chosen slider range.
+            dashboard.bind(donutRangeSlider, pieChart);
+
+            // Draw the dashboard.
+            dashboard.draw(data);     
+
+            var components = [
+                {type: 'igoogle', datasource: 'https://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA',
+                gadget: 'https://www.google.com/ig/modules/pie-chart.xml',
+                userprefs: {'3d': 1}},
+                {type: 'html', datasource: 'https://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA'},
+                {type: 'csv', datasource: 'https://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA'},
+                {type: 'htmlcode', datasource: 'https://spreadsheets.google.com/tq?key=pCQbetd-CptHnwJEfo8tALA',
+                gadget: 'https://www.google.com/ig/modules/pie-chart.xml',
+                userprefs: {'3d': 1},
+                style: 'width: 800px; height: 700px; border: 3px solid purple;'}
+            ];
+
+            var container = document.getElementById('toolbar_div');
+            google.visualization.drawToolbar(container, components);                   
+        }
+
+        // On "OK" save the chart to a <div> on the page.
+        function redrawChart(){
+            chartEditor.getChartWrapper().draw(document.getElementById('chart_div'));
+
+            alert(chartEditor.getChartWrapper().getChartType());
+        }    
+
+        // Callback that draws the pie chart for Anthony's pizza.
+        function drawAnthonyChart() {
+            // Create the data table for Anthony's pizza.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+                ['Mushrooms', 2],
+                ['Onions', 2],
+                ['Olives', 2],
+                ['Zucchini', 0],
+                ['Pepperoni', 3]
+            ]);
+
+            // Set options for Anthony's pie chart.
+            var options = {
+                title:'How Much Pizza Anthony Ate Last Night',
+                width:400,
+                height:300,
+                animation: {
+                    "startup": true,                    
+                    duration: 1000,
+                    easing: 'out',
+                },
+            };
+
+            // Instantiate and draw the chart for Anthony's pizza.
+            var chart = new google.visualization.BarChart(document.getElementById('Anthony_chart_div'));
+            
+            chart.draw(data, options);
+        }
+        
+        function drawMultiChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+                ['Mushrooms', 3],
+                ['Onions', 1],
+                ['Olives', 1],
+                ['Zucchini', 1],
+                ['Pepperoni', 2]
+            ]);
+
+            var piechart_options = {title:'Pie Chart: How Much Pizza I Ate Last Night',
+                        width:400,
+                        height:300};
+            
+            var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+            
+            piechart.draw(data, piechart_options);
+
+            var barchart_options = {title:'Barchart: How Much Pizza I Ate Last Night',
+                        width:400,
+                        height:300,
+                        legend: 'none'};
+            
+            var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
+            
+            barchart.draw(data, barchart_options);
+        }
+        
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.         
+        function drawChart(arg1, arg2, arg3) {
+            arg3.draw(arg1, arg2);
+        }       
+
+        // The select handler. Call the chart's getSelection() method
+        function selectHandler() {
+            var selectedItem = chart.getSelection()[0];
+            
+            if (selectedItem) {
+                var value = data.getValue(selectedItem.row, selectedItem.column == null ? 0 : selectedItem.column);
+                alert('The user selected ' + value);
+            }
+        }  
+
+        // The select handler. Call the chart's getSelection() method
+        function usefulHandler() {
+            var selectedItem = chart.getChart().getSelection()[0];
+
+            if (selectedItem) {
+                var value = chart.getDataTable().getValue(selectedItem.row, selectedItem.column == null ? 0 : selectedItem.column);
+                alert('The user selected ' + value);
+            }
+        }     
+
+        $(document).ready(function(){
+            //alert(new Date(2008, 1 ,1));
+
+            $('button').click(function() {
+                var buttonText = $(this).html();
+
+                switch(buttonText){
+                case "chart.draw()":
+                    // Create our data table.
+                    data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Topping');
+                    data.addColumn('number', 'Slices');
+                    data.addRows([
+                        ['Mushrooms', 3],
+                        ['Onions', 1],
+                        ['Olives', 1],
+                        ['Zucchini', 1],
+                        ['Pepperoni', 2]
+                    ]);
+                    
+                    // Set chart options
+                    var options = {'title':'How Much Pizza I Ate Last Night',
+                                'width':400,
+                                'height':300};
+
+                    // Instantiate and draw our chart, passing in some options.
+                    chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                    
+                    google.visualization.events.addListener(chart, 'select', selectHandler);
+        
+                    drawChart(data, options, chart); 
+
+                    return false;
+                case "ChartWrapper":
+                    dataTable = [
+                        ['dd', 'Germany', 'USA', 'Brazil', 'Canada', 'France', 'RU'],
+                        ['a', 700, 300, 400, 500, 600, 800],
+                        ['b', 800, 400, 500, 600, 700, 900],
+                        ['c', 900, 500, 600, 700, 800, 1000]
+                    ];
+
+                    chart = new google.visualization.ChartWrapper({
+                        chartType: 'LineChart',
+                        dataTable: dataTable,
+                        options: {'title': 'Countries'},
+                        containerId: 'chart_div'
+                    });
+
+                    chartEditor = new google.visualization.ChartEditor();
+                    google.visualization.events.addListener(chartEditor, 'ok', redrawChart);
+                    //chartEditor.openDialog(chart, {}); 
+
+                    // Never called.
+                    google.visualization.events.addListener(chart, 'onmouseover', uselessHandler);
+
+                    // Must wait for the ready event in order to
+                    // request the chart and subscribe to 'onmouseover'.
+                    google.visualization.events.addListener(chart, 'ready', onReady);
+
+                    chart.draw();  
+
+                    // Never called
+                    function uselessHandler() {
+                        alert("I am never called!");
+                    }
+
+                    function onReady() {
+                        //google.visualization.events.addListener(chart.getChart(), 'onmouseover', usefulHandler);
+                        google.visualization.events.addListener(chart.getChart(), 'select', usefulHandler);
+                    }                     
+                    
+                    return false;
+                case "edit":
+                    chartEditor.openDialog(chart, {}); 
+
+                    break;
+                case "DrawChart()":
+                    dataTable = [
+                        ["Country", "Population Density"],
+                        ["Indonesia", 117],
+                        ["China", 137],
+                        ["Nigeria", 142],
+                        ["Pakistan", 198],
+                        ["India", 336],
+                        ["Japan", 339],
+                        ["Bangladesh", 1045]
+                    ];
+
+                    google.visualization.drawChart({
+                        "containerId": "chart_div",
+                        "dataTable": dataTable,
+                        "refreshInterval": 5,
+                        "chartType": "Table",
+                        "options": {
+                            "alternatingRowStyle": true,
+                            "showRowNumber" : true,
+                        }
+                    });     
+
+                    return false;
+                case "PieChart":
+                    // Define the chart to be drawn.
+                    data = new google.visualization.DataTable();                
+                
+                    // Declare columns
+                    data.addColumn('string', 'Topping');
+                    data.addColumn('number', 'Slices');
+                    
+                    // Add data.
+                    data.addRows([
+                        ['Mushrooms', 3],
+                        ['Onions', 1],
+                        ['Olives', 1],
+                        ['Zucchini', 1],
+                        ['Pepperoni', 2]
+                    ]);   
+
+                    // Set chart options
+                    options = 
+                        {
+                            'title':'How Much Pizza I Ate Last Night',
+                            'width':400,
+                            'height':300
+                        };
+
+                    chart = new google.visualization.PieChart(document.getElementById('chart_div'));                                     
+                    
+                    break;
+                case "BarChart":
+                    // Define the chart to be drawn.
+                    data = new google.visualization.DataTable();                
+                    
+                    // Declare columns
+                    data.addColumn('string', 'Element');
+                    data.addColumn('number', 'Percentage');
+                    
+                    // Add data.
+                    data.addRows([
+                        ['Nitrogen', 0.78],
+                        ['Oxygen', 0.21],
+                        ['Other', 0.01]
+                    ]);
+
+                    // Set chart options
+                    options = {
+                        'width':400,
+                        'height':300
+                    };
+                    //options.title = "";
+
+                    // Instantiate and draw the chart.
+                    chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+                    
+                    break;
+                case "DataTable":
+                    // Create the data table.
+                    data = new google.visualization.DataTable();
+                    
+                    // Declare columns
+                    data.addColumn('string', 'Employee Name');
+                    data.addColumn('datetime', 'Hire Date');
+
+                    // Add data.
+                    data.addRows([
+                        ['Mike', {v:new Date(2008,1,28), f:'February 28, 2008'}], // Example of specifying actual and formatted values.
+                        ['Bob', new Date(2007,5,1)],                              // More typically this would be done using a
+                        ['Alice', new Date(2006,7,16)],                           // formatter.
+                        ['Frank', new Date(2007,11,28)],
+                        ['Floyd', new Date(2005,3,13)],
+                        ['Fritz', new Date(2011,6,1)]
+                    ]);
+
+                    // Set chart options
+                    options = {
+                        showRowNumber: true, 
+                        width: '100%', 
+                        height: '100%'
+                    };
+                    //options.title = "";
+
+                    // Instantiate and draw the table.
+                    chart = new google.visualization.Table(document.getElementById('chart_div'));
+                    
+                    break;
+                }
+
+                // Listen for the 'select' event, and call my function selectHandler() when
+                // the user selects something on the chart.
+                google.visualization.events.addListener(chart, 'select', selectHandler);
+
+                drawChart(data, options, chart); 
+            })
+        }); 
+      </script>    
+</body>
+</html>
