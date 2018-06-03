@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <title>Sample</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="x1">
+      <div data-role="header">
+        <h1>헤더</h1>
+        <a href="#mz">버튼</a>
+      </div>
+      <div data-role="content">  
+        <p>헤더에 버튼이 표시된다</p>
+      </div>
+    </div>
+    <div data-role="page" id="mz">
+      <div data-role="header">
+        <h1>2페이지</h1>
+        <a href="#x1">버튼1</a>
+        <a href="#mebius">버튼2</a>
+      </div>
+      <div data-role="content">  
+        <p>헤더에 2개 버튼이 표시된다</p>
+      </div>
+    </div>
+    <div data-role="page" id="mebius">
+      <div data-role="header">
+        <h1>3페이지</h1>
+        <a href="#mz" class="ui-btn-right">버튼1</a>
+      </div>
+      <div data-role="content">  
+        <p>헤더 우측에 버튼이 표시된다</p>
+      </div>
+    </div>
+  </body>
+</html>

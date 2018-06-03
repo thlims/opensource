@@ -6,11 +6,16 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"/>
     <script src="main.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     <script>
         $(function() {
+
+
+
+
             $("#section016 :header").hover(function(){
                 $(this).css("background-color","yellow");
             },function(){
@@ -32,6 +37,171 @@
             $("#section020 h1+ol").css("border","1px solid red");
 
             $("#section021 #sale tbody tr:lt(6)").css("background-color","orange");
+
+            // section209
+            $("#check").click(function() {
+                var type1 = $.type("C&R연구소");
+                var type2 = $.type(null);
+                var type3 = $.type([1,2,3]);
+
+                $("#section209 output:eq(0)").text(type1 + ", " + type2 + ", " + type3);
+            });
+
+            // section210
+            var a = {};
+            var flag1 = $.isPlainObject(a);
+
+            var b = new Object();
+            var flag2 = $.isPlainObject(b)
+
+            var c = new Object(39);
+            var flag3 = $.isPlainObject(c);
+
+            var d = {e:2.71, pi:3.14};
+            var flag4 = $.isPlainObject(d);
+
+            var e = "JavaScript";
+            var flag5 = $.isPlainObject(e);
+
+            $("#section210 output:first").html("a:" + flag1 + "<br>b:" + flag2 + "<br>c:" + flag3 + "<br>d:" + flag4 + "<br>e:" + flag5);
+
+            // section211
+            var a = {};
+            var flag1 = $.isEmptyObject(a);
+
+            var b = new Object(123);
+            var flag2 = $.isEmptyObject(b)
+
+            var c = {e:2.71, pi:3.14};
+            var flag3 = $.isEmptyObject(c);
+
+            var d = [];
+            var flag4 = $.isEmptyObject(d);
+
+            var e = {};
+            e.pi = 3.14;
+            var flag5 = $.isEmptyObject(e);
+
+            $("#section211 output:first").html("a:" + flag1 + "<br>b:" + flag2 + "<br>c:" + flag3 + "<br>d:" + flag4 + "<br>e:" + flag5);
+            
+            // section212
+            var a = window;
+            var flag1 = $.isWindow(a);
+
+            var b = new Object();
+            var flag2 = $.isWindow(b);
+
+            $("#section212 output:first").html("a:" + flag1 + "<br>b:" + flag2);
+
+            // section213
+            var count = 1;
+
+            var myObj = {
+                codeNo : 700,
+                getCode : function(val) {
+                    var htmlText = $("#section213 output:first").html();
+
+                    $("#section213 output:first").html(htmlText + count + " : " + this.codeNo + "*" + val + "<br>");
+
+                    count++;
+                }
+            };
+
+            var myObj2 = {
+                codeNo:1500
+            };
+
+            $("#section213 :button:eq(0)").click(myObj.getCode);
+
+            $("#section213 :button:eq(1)").click($.proxy(myObj.getCode,myObj));
+            
+            $("#section213 :button:eq(2)").click($.proxy(myObj.getCode,myObj2));
+
+            $("#section213 :button:eq(3)").click($.proxy(myObj.getCode,myObj2,2531));
+
+            myObj.getCode();
+
+            // section214
+            var a = new Number(5963);
+            var flag1 = $.isNumeric(a);
+
+            var b = 3.14e2;
+            var flag2 = $.isNumeric(b);
+
+            var c = new Number();
+            var flag3 = $.isNumeric(3);
+
+            var d = new Function();
+            var flag4 = $.isNumeric(d);
+
+            var e = Infinity;
+            var flag5 = $.isNumeric(e);
+
+            $("#section214 output:first").html("a:" + flag1 + "<br>b:" + flag2 + "<br>c:" + flag3 + "<br>d:" + flag4 + "<br>e:" + flag5);
+            
+            // section215
+            var a = function() {var i = 4649;}
+            var flag1 = $.isFunction(a);
+
+            var b = a;
+            var flag2 = $.isFunction(b);
+
+            var c = new Number();
+            var flag3 = $.isFunction(c);
+
+            var d = new Function();
+            var flag4 = $.isFunction(d);
+            
+            $("#section215 output:first").html("a:" + flag1 + "<br>b:" + flag2 + "<br>c:" + flag3 + "<br>d:" + flag4);
+            
+            // section216
+            var a = new Array()
+            var flag1 = $.isArray(a);
+
+            var b = new Object();
+            var flag2 = $.isArray(b);
+
+            var c = new Number();
+            var flag3 = $.isArray(c);
+
+            var d = new Function();
+            var flag4 = $.isArray(d);
+            
+            $("#section216 output:first").html("a:" + flag1 + "<br>b:" + flag2 + "<br>c:" + flag3);
+            
+            // section217
+            var langList = ["Java","Ruby","Python","JavaScript","Java","Ada","C","FORTH"];
+
+            var flag1 = $.inArray("JavaScript",langList);
+            var flag2 = $.inArray("COBOL",langList);
+            var flag3 = $.inArray("Java",langList,2);
+            
+            $("#section217 output:first").html("a:" + flag1 + "<br>b:" + flag2 + "<br>c:" + flag3);
+            
+            // section218
+            $("#section218 :button").click(function() {
+                var flag1 = $.contains($("#myList1").get(0),$("#melon").get(0));
+
+                var flag2 = $.contains($("#myList2").get(0),$("#melon").get(0));
+
+                $("#section218 output:first").html("a:" + flag1 + "<br>b:" + flag2);
+            });
+
+            $("#section234 img, #section234 div").draggable();
+
+            $("#section235 img").draggable();
+
+            $("#dropZone").droppable({
+                drop :function(evt,ui){
+                    $("#dropZone").text(ui.draggable[0].src);
+                }
+            });
+
+            $("#section236 img, #section236 div").resizable();
+
+            $("#selList").selectable();
+
+            $("#sortList").sortable();
 
             $("#section318 div:eq(0)").click(function() {
                 $(this).switchClass("ef2_318","ef1_318");
@@ -78,6 +248,33 @@
     </script>
     <style>
         body > div {border: 1px solid black;margin: 10px;}
+
+        #section234 > div, #section236 > div {
+            width: 100px;height: 100px;
+            border: 2px solid black;background-color: yellow;
+        }
+
+        #dropZone {
+            width: 200px;height: 150px;border: 2px solid blue;
+            background-color: yellow;
+        }
+
+        #selList {
+            list-style-type: none;margin: 0;padding: 0;width: 20%;
+        }
+
+        #selList li {
+            padding: 5pt;
+        }
+
+        #selList .ui-selectin {
+            background:red; opacity: 0.25;
+        }
+
+        #selList .ui-selected {
+            background: red;opacity: 1.0;color: white;
+        }
+
     </style>
 </head>
 <body>
@@ -163,6 +360,120 @@
             </tbody>
         </table> 
     </div>  
+
+    <div id="section209">
+        <h1>오브젝트 종류를 반환한다</h1>
+        <form>
+            <input type="button" value="종류 체크" id="check">
+        </form>
+        <output></output>
+    </div>    
+
+    <div id="section210">
+        <h1>일반 오브젝트인지 확인한다</h1>        
+        <output></output>
+    </div> 
+
+    <div id="section211">
+        <h1>오브젝트가 열거형인지 빈 것인지 확인한다</h1>        
+        <output></output>
+    </div>   
+    
+    <div id="section212">
+        <h1>window 오브젝트인지 확인한다</h1>        
+        <output></output>
+    </div>    
+    
+    <div id="section213">
+        <h1>this가 가리키는 오브젝트를 지정한다</h1>   
+        <form>
+            <input type="button" value="체크1">
+            <input type="button" value="체크2">
+            <input type="button" value="체크3">
+            <input type="button" value="체크4">
+        </form>     
+        <output></output>
+    </div>   
+
+    <div id="section214">
+        <h1>숫자인지 확인한다</h1>  
+        <output></output>
+    </div>       
+
+    <div id="section215">
+        <h1>함수인지 확인한다</h1>  
+        <output></output>
+    </div>    
+
+    <div id="section216">
+        <h1>배열인지 확인한다</h1>  
+        <output></output>
+    </div>    
+
+    <div id="section217">
+        <h1>배열에 해당 요소가 있는지 확인한다</h1>  
+        <output></output>
+    </div>     
+
+    <div id="section218">
+        <h1>요소가 어느 요소의 노드에 포함되어 있는지 확인한다</h1>  
+        <form>
+            <input type="button" value="체크">
+        </form>
+        <ol id="myList1">
+            <li>딸기</li>
+            <li id="melon">멜론</li>
+            <li>사과</li>
+        </ol>
+        <ol id="myList2">
+            <li>밀감</li>
+            <li>포도</li>
+            <li>배</li>
+        </ol>
+        <output></output>
+    </div>       
+
+    <div id="section234">
+        <h1>요소를 드래그 할 수 있다</h1>
+        <img src="images\bootstrap.png">
+        <img src="images\css3.png">
+        <div>요소1</div>
+        <div>요소2</div>
+    </div>
+
+    <div id="section235">
+        <h1>요소를 드롭할 수 있다</h1>
+        <img src="images\bootstrap.png">
+        <img src="images\css3.png">
+        <div id="dropZone">여기에 이미지를 드롭해 주세요</div>
+    </div>
+
+    <div id="section236">
+        <h1>요소를 리사이즈 할 수 있다</h1>
+        <img src="images\bootstrap.png">
+        <div>요소1</div>
+        <div>요소2</div>
+    </div>
+
+    <div id="section237">
+        <h1>목록을 선택한다</h1>
+        <ol id="selList">
+            <li class="ui-widget-content">Twitter</li>
+            <li class="ui-widget-content">Facebook</li>
+            <li class="ui-widget-content">Google+</li>
+            <li class="ui-widget-content">Naver</li>
+        </ol>
+    </div>
+
+    <div id="section238">
+        <h1>목록을 재배열 할 수 있다</h1>
+        <ol id="sortList">
+            <li class="ui-state-default">Twitter</li>
+            <li class="ui-state-default">Facebook</li>
+            <li class="ui-state-default">Google+</li>
+            <li class="ui-state-default">Naver</li>
+        </ol>
+    </div>
 
     <div id="section318">
         <style>

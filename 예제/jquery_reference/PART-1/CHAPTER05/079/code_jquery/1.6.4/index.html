@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sample</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <script src="js/sample.js"></script>
+    <style>
+      div { border:1px solid black; margin: 5px; padding: 4px; }
+    </style>
+  </head>
+  <body>
+    <h1>특정 position 속성의 부모 요소를 얻는다</h1>
+    <p>이미지를 클릭해 주십시오</p>
+    <div>Block 1-1
+      <div style="position: relative">Block 1-2
+        <div>Block 1-3
+          <div style="position: static">
+            <img src="images/0.jpg" width="128" height="72" alt="경회루">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>Block 2-1
+      <div style="position: absolute">Block 2-2
+        <div>
+          <img src="images/1.jpg" width="128" height="72" alt="누리마루">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

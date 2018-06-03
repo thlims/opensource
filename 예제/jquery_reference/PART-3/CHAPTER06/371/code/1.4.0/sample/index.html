@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <title>Sample</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="js/sample.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+  </head>
+  <body>
+    <!-- 1페이지 -->
+    <div data-role="page" id="page01">
+      <div data-role="header"><h1>Page 01</h1></div>
+      <div data-role="content">
+        <p>여기는 1페이지이다</p>
+        <ul>
+          <li><a href="#page02">페이지2로</a></li>
+          <li><a href="#dlg" data-rel="dialog">다이얼로그표시</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- 2페이지 -->
+    <div data-role="page" id="page02">
+      <div data-role="header"><h1>Page 02</h1></div>
+      <div data-role="content"><p>2페이지이다</p></div>
+    </div>
+    <!-- 3페이지 -->
+    <div data-role="page" id="dlg">
+      <div data-role="header"><h1>주의</h1></div>
+      <div data-role="content"><p>여기는 위험지역이다</p></div>
+    </div>
+  </body>
+</html>
